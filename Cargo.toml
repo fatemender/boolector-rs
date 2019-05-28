@@ -1,0 +1,9 @@
+[package]
+authors                                 = [ "Mikhail Solovev <icee@icee.ru>" ]
+edition                                 = "2018"
+name                                    = "boolector"
+version                                 = "0.1.0"
+publish = false
+
+[dependencies]
+boolector-sys                           = "0.2"
