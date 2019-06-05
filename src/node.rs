@@ -13,152 +13,152 @@ use crate::{NodeRef, Solver};
 /// to `log2(n)`.
 pub enum Node<'a> {
     /// Integer addition for bit vectors.
-    Add(NodeRef<'a>, NodeRef<'a>),
+    Add(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Bitwise AND for bit vectors.
-    And(NodeRef<'a>, NodeRef<'a>),
+    And(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Concatenation for bit vectors.
-    Concat(NodeRef<'a>, NodeRef<'a>),
+    Concat(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// If-then-else conditional for bit vectors or arrays, the condition must
     /// be a boolean.
-    Cond(NodeRef<'a>, NodeRef<'a>, NodeRef<'a>),
+    Cond(&'a NodeRef<'a>, &'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Integer decrement for bit vectors.
-    Dec(NodeRef<'a>),
+    Dec(&'a NodeRef<'a>),
 
     /// Equality for bit vectors or arrays.
-    Eq(NodeRef<'a>, NodeRef<'a>),
+    Eq(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Equivalence for booleans.
-    Iff(NodeRef<'a>, NodeRef<'a>),
+    Iff(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Integer increment for bit vectors.
-    Inc(NodeRef<'a>),
+    Inc(&'a NodeRef<'a>),
 
     /// Integer truncating multiplication for bit vectors.
-    Mul(NodeRef<'a>, NodeRef<'a>),
+    Mul(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Bitwise NAND for bit vectors.
-    NAnd(NodeRef<'a>, NodeRef<'a>),
+    NAnd(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Inequality for bit vectors or arrays.
-    Ne(NodeRef<'a>, NodeRef<'a>),
+    Ne(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Two's complement (signed integer) negation for bit vectors.
-    Neg(NodeRef<'a>),
+    Neg(&'a NodeRef<'a>),
 
     /// Bitwise NOR for bit vectors.
-    NOr(NodeRef<'a>, NodeRef<'a>),
+    NOr(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// One's complement negation for bit vectors.
-    Not(NodeRef<'a>),
+    Not(&'a NodeRef<'a>),
 
     /// Bitwise OR for bit vectors.
-    Or(NodeRef<'a>, NodeRef<'a>),
+    Or(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// AND-reduction for bit vectors.
-    RedAnd(NodeRef<'a>),
+    RedAnd(&'a NodeRef<'a>),
 
     /// OR-reduction for bit vectors.
-    RedOr(NodeRef<'a>),
+    RedOr(&'a NodeRef<'a>),
 
     /// XOR-reduction for bit vectors.
-    RedXor(NodeRef<'a>),
+    RedXor(&'a NodeRef<'a>),
 
     /// Rotate left for bit vectors, see note above about shifts and rotates.
-    Rol(NodeRef<'a>, NodeRef<'a>),
+    Rol(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Rotate right for bit vectors, see note above about shifts and rotates.
-    Ror(NodeRef<'a>, NodeRef<'a>),
+    Ror(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer addition overflow flag for bit vectors.
-    SAddO(NodeRef<'a>, NodeRef<'a>),
+    SAddO(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer division for bit vectors.
-    SDiv(NodeRef<'a>, NodeRef<'a>),
+    SDiv(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer division overflow flag for bit vectors.
-    SDivO(NodeRef<'a>, NodeRef<'a>),
+    SDivO(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer greater-than comparison for bit vectors.
-    SGt(NodeRef<'a>, NodeRef<'a>),
+    SGt(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer greater-than-or-equal comparison for bit vectors.
-    SGte(NodeRef<'a>, NodeRef<'a>),
+    SGte(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Shift left for bit vectors, see note above about shifts and rotates.
-    Sll(NodeRef<'a>, NodeRef<'a>),
+    Sll(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer less-than comparison for bit vectors.
-    SLt(NodeRef<'a>, NodeRef<'a>),
+    SLt(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer less-than-or-equal comparison for bit vectors.
-    SLte(NodeRef<'a>, NodeRef<'a>),
+    SLte(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer modulo (sign matches the divisor sign) for bit vectors.
-    SMod(NodeRef<'a>, NodeRef<'a>),
+    SMod(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer multiplication overflow flag for bit vectors.
-    SMulO(NodeRef<'a>, NodeRef<'a>),
+    SMulO(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Arithmetic shift right for bit vectors, see note above about shifts and
     /// rotates.
-    Sra(NodeRef<'a>, NodeRef<'a>),
+    Sra(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer remainder for bit vectors.
-    SRem(NodeRef<'a>, NodeRef<'a>),
+    SRem(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Logical shift right for bit vectors, see note above about shifts and
     /// rotates.
-    Srl(NodeRef<'a>, NodeRef<'a>),
+    Srl(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Signed integer subtraction overflow flag for bit vectors.
-    SSubO(NodeRef<'a>, NodeRef<'a>),
+    SSubO(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Integer subtraction for bit vectors.
-    Sub(NodeRef<'a>, NodeRef<'a>),
+    Sub(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Unsigned integer addition overflow flag for bit vectors.
-    UAddO(NodeRef<'a>, NodeRef<'a>),
+    UAddO(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Unsigned integer division for bit vectors, returns -1 for division by
     /// zero.
-    UDiv(NodeRef<'a>, NodeRef<'a>),
+    UDiv(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Unsigned integer greater-than comparison for bit vectors.
-    UGt(NodeRef<'a>, NodeRef<'a>),
+    UGt(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Unsigned integer greater-than-or-equal comparison for bit vectors.
-    UGte(NodeRef<'a>, NodeRef<'a>),
+    UGte(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Unsigned integer less-than comparison for bit vectors.
-    ULt(NodeRef<'a>, NodeRef<'a>),
+    ULt(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Unsigned integer less-than-or-equal comparison for bit vectors.
-    ULte(NodeRef<'a>, NodeRef<'a>),
+    ULte(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Unsigned integer multiplication overflow flag for bit vectors.
-    UMulO(NodeRef<'a>, NodeRef<'a>),
+    UMulO(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Unsigned integer remainder for bit vectors, returns 0 for division by
     /// zero.
-    URem(NodeRef<'a>, NodeRef<'a>),
+    URem(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Unsigned integer subtraction overflow flag for bit vectors.
-    USubO(NodeRef<'a>, NodeRef<'a>),
+    USubO(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Bitwise XNOR for bit vectors.
-    XNOr(NodeRef<'a>, NodeRef<'a>),
+    XNOr(&'a NodeRef<'a>, &'a NodeRef<'a>),
 
     /// Bitwise XOR for bit vectors.
-    Xor(NodeRef<'a>, NodeRef<'a>),
+    Xor(&'a NodeRef<'a>, &'a NodeRef<'a>),
 }
 
 impl<'a> Node<'a> {
     /// Create a node reference.
-    pub fn into_ref(self, solver: &'a Solver<'a>) -> NodeRef<'a> {
+    pub fn into_ref(self, solver: &'a Solver) -> NodeRef<'a> {
         match self {
             Node::Add(a, b) => Self::into_ref_ffi_2(solver, a, b, ffi::boolector_add),
             Node::And(a, b) => Self::into_ref_ffi_2(solver, a, b, ffi::boolector_and),
@@ -216,7 +216,7 @@ type NodeFn3 = unsafe extern fn(*mut ffi::Btor, *mut ffi::BoolectorNode, *mut ff
 
 impl<'a> Node<'a> {
     #[inline]
-    fn into_ref_ffi_1(solver: &'a Solver<'a>, a: NodeRef<'a>, f: NodeFn1) -> NodeRef<'a> {
+    fn into_ref_ffi_1(solver: &'a Solver, a: &'a NodeRef<'a>, f: NodeFn1) -> NodeRef<'a> {
         assert_eq!(solver.btor_ptr(), a.solver().btor_ptr());
 
         unsafe {
@@ -225,7 +225,7 @@ impl<'a> Node<'a> {
     }
 
     #[inline]
-    fn into_ref_ffi_2(solver: &'a Solver<'a>, a: NodeRef<'a>, b: NodeRef<'a>, f: NodeFn2) -> NodeRef<'a> {
+    fn into_ref_ffi_2(solver: &'a Solver, a: &'a NodeRef<'a>, b: &'a NodeRef<'a>, f: NodeFn2) -> NodeRef<'a> {
         assert_eq!(solver.btor_ptr(), a.solver().btor_ptr());
         assert_eq!(solver.btor_ptr(), b.solver().btor_ptr());
 
@@ -235,7 +235,7 @@ impl<'a> Node<'a> {
     }
 
     #[inline]
-    fn into_ref_ffi_3(solver: &'a Solver<'a>, a: NodeRef<'a>, b: NodeRef<'a>, c: NodeRef<'a>, f: NodeFn3) -> NodeRef<'a> {
+    fn into_ref_ffi_3(solver: &'a Solver, a: &'a NodeRef<'a>, b: &'a NodeRef<'a>, c: &'a NodeRef<'a>, f: NodeFn3) -> NodeRef<'a> {
         assert_eq!(solver.btor_ptr(), a.solver().btor_ptr());
         assert_eq!(solver.btor_ptr(), b.solver().btor_ptr());
         assert_eq!(solver.btor_ptr(), c.solver().btor_ptr());

@@ -23,7 +23,7 @@ impl Builder {
     }
 
     /// Consume the builder and return the constructed instance.
-    pub fn finish<'a>(mut self) -> Solver<'a> {
+    pub fn finish(mut self) -> Solver {
         unsafe {
             Solver::from_ffi(mem::replace(&mut self.ptr, ptr::null_mut()))
         }

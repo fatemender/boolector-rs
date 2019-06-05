@@ -8,45 +8,40 @@ use crate::{Node, NodeRef};
 pub struct Unsigned<'a>(pub NodeRef<'a>);
 
 impl<'a> Unsigned<'a> {
-    pub fn lt(self, other: Self) -> NodeRef<'a> {
-        let solver = self.0.solver();
-        Node::ULt(self.0, other.0).into_ref(solver)
+    pub fn lt(&'a self, other: &'a Self) -> NodeRef<'a> {
+        Node::ULt(&*self, &*other).into_ref(self.0.solver())
     }
 }
 
-impl<'a> ops::Add for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::Add for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn add(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::Add(self.0, other.0).into_ref(solver))
+    fn add(self, other: Self) -> Self::Output {
+        Unsigned(Node::Add(&*self, &*other).into_ref(self.0.solver()))
     }
 }
 
-impl<'a> ops::BitAnd for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::BitAnd for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn bitand(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::And(self.0, other.0).into_ref(solver))
+    fn bitand(self, other: Self) -> Self::Output {
+        Unsigned(Node::And(&*self, &*other).into_ref(self.0.solver()))
     }
 }
 
-impl<'a> ops::BitOr for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::BitOr for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn bitor(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::Or(self.0, other.0).into_ref(solver))
+    fn bitor(self, other: Self) -> Self::Output {
+        Unsigned(Node::Or(&*self, &*other).into_ref(self.0.solver()))
     }
 }
 
-impl<'a> ops::BitXor for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::BitXor for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn bitxor(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::Xor(self.0, other.0).into_ref(solver))
+    fn bitxor(self, other: Self) -> Self::Output {
+        Unsigned(Node::Xor(&*self, &*other).into_ref(self.0.solver()))
     }
 }
 
@@ -59,65 +54,58 @@ impl<'a> ops::Deref for Unsigned<'a> {
     }
 }
 
-impl<'a> ops::Div for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::Div for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn div(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::UDiv(self.0, other.0).into_ref(solver))
+    fn div(self, other: Self) -> Self::Output {
+        Unsigned(Node::UDiv(&*self, &*other).into_ref(self.0.solver()))
     }
 }
 
-impl<'a> ops::Mul for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::Mul for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn mul(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::Mul(self.0, other.0).into_ref(solver))
+    fn mul(self, other: Self) -> Self::Output {
+        Unsigned(Node::Mul(&*self, &*other).into_ref(self.0.solver()))
     }
 }
 
-impl<'a> ops::Not for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::Not for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn not(self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::Not(self.0).into_ref(solver))
+    fn not(self) -> Self::Output {
+        Unsigned(Node::Not(&*self).into_ref(self.0.solver()))
     }
 }
 
-impl<'a> ops::Rem for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::Rem for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn rem(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::URem(self.0, other.0).into_ref(solver))
+    fn rem(self, other: Self) -> Self::Output {
+        Unsigned(Node::URem(&*self, &*other).into_ref(self.0.solver()))
     }
 }
 
-impl<'a> ops::Shl for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::Shl for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn shl(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::Sll(self.0, other.0).into_ref(solver))
+    fn shl(self, other: Self) -> Self::Output {
+        Unsigned(Node::Sll(&*self, &*other).into_ref(self.0.solver()))
     }
 }
 
-impl<'a> ops::Shr for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::Shr for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn shr(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::Srl(self.0, other.0).into_ref(solver))
+    fn shr(self, other: Self) -> Self::Output {
+        Unsigned(Node::Srl(&*self, &*other).into_ref(self.0.solver()))
     }
 }
 
-impl<'a> ops::Sub for Unsigned<'a> {
-    type Output = Self;
+impl<'a> ops::Sub for &'a Unsigned<'a> {
+    type Output = Unsigned<'a>;
 
-    fn sub(self, other: Self) -> Self {
-        let solver = self.0.solver();
-        Unsigned(Node::Sub(self.0, other.0).into_ref(solver))
+    fn sub(self, other: Self) -> Self::Output {
+        Unsigned(Node::Sub(&*self, &*other).into_ref(self.0.solver()))
     }
 }

@@ -7,13 +7,13 @@ use crate::{NodeRef, Solver};
 
 /// Sort reference.
 pub struct SortRef<'a> {
-    solver: &'a Solver<'a>,
+    solver: &'a Solver,
     sort_ptr: ffi::BoolectorSort,
 }
 
 impl<'a> SortRef<'a> {
     /// Return parent solver instance.
-    pub fn solver(&self) -> &'a Solver<'a> {
+    pub fn solver(&self) -> &Solver {
         self.solver
     }
 
@@ -63,7 +63,7 @@ impl<'a> SortRef<'a> {
 
     /// Construct a sort reference from raw `BoolectorSort` value and its parent
     /// solver.
-    pub unsafe fn from_ffi(solver: &'a Solver<'a>, sort_ptr: ffi::BoolectorSort) -> Self {
+    pub unsafe fn from_ffi(solver: &'a Solver, sort_ptr: ffi::BoolectorSort) -> Self {
         SortRef {
             solver,
             sort_ptr,

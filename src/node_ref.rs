@@ -6,19 +6,19 @@ use crate::{Node, Solver};
 
 /// Expression node reference.
 pub struct NodeRef<'a> {
-    solver: &'a Solver<'a>,
+    solver: &'a Solver,
     node_ptr: *mut ffi::BoolectorNode,
 }
 
 impl<'a> NodeRef<'a> {
     /// Return parent solver instance.
-    pub fn solver(&self) -> &'a Solver<'a> {
+    pub fn solver(&self) -> &Solver {
         self.solver
     }
 
     /// Construct a node reference from raw `BoolectorNode` pointer and its
     /// parent solver.
-    pub unsafe fn from_ffi(solver: &'a Solver<'a>, node_ptr: *mut ffi::BoolectorNode) -> Self {
+    pub unsafe fn from_ffi(solver: &'a Solver, node_ptr: *mut ffi::BoolectorNode) -> Self {
         NodeRef {
             solver,
             node_ptr,
@@ -58,74 +58,66 @@ impl<'a> Drop for NodeRef<'a> {
     }
 }
 
-impl<'a> ops::Add for NodeRef<'a> {
-    type Output = Self;
+impl<'a> ops::Add for &'a NodeRef<'a> {
+    type Output = NodeRef<'a>;
 
-    fn add(self, other: Self) -> Self {
-        let solver = self.solver();
-        Node::Add(self, other).into_ref(solver)
+    fn add(self, other: Self) -> Self::Output {
+        Node::Add(self, other).into_ref(self.solver())
     }
 }
 
-impl<'a> ops::BitAnd for NodeRef<'a> {
-    type Output = Self;
+impl<'a> ops::BitAnd for &'a NodeRef<'a> {
+    type Output = NodeRef<'a>;
 
-    fn bitand(self, other: Self) -> Self {
-        let solver = self.solver();
-        Node::And(self, other).into_ref(solver)
+    fn bitand(self, other: Self) -> Self::Output {
+        Node::And(self, other).into_ref(self.solver())
     }
 }
 
-impl<'a> ops::BitOr for NodeRef<'a> {
-    type Output = Self;
+impl<'a> ops::BitOr for &'a NodeRef<'a> {
+    type Output = NodeRef<'a>;
 
-    fn bitor(self, other: Self) -> Self {
-        let solver = self.solver();
-        Node::Or(self, other).into_ref(solver)
+    fn bitor(self, other: Self) -> Self::Output {
+        Node::Or(self, other).into_ref(self.solver())
     }
 }
 
-impl<'a> ops::BitXor for NodeRef<'a> {
-    type Output = Self;
+impl<'a> ops::BitXor for &'a NodeRef<'a> {
+    type Output = NodeRef<'a>;
 
-    fn bitxor(self, other: Self) -> Self {
-        let solver = self.solver();
-        Node::Xor(self, other).into_ref(solver)
+    fn bitxor(self, other: Self) -> Self::Output {
+        Node::Xor(self, other).into_ref(self.solver())
     }
 }
 
-impl<'a> ops::Mul for NodeRef<'a> {
-    type Output = Self;
+impl<'a> ops::Mul for &'a NodeRef<'a> {
+    type Output = NodeRef<'a>;
 
-    fn mul(self, other: Self) -> Self {
-        let solver = self.solver();
-        Node::Mul(self, other).into_ref(solver)
+    fn mul(self, other: Self) -> Self::Output {
+        Node::Mul(self, other).into_ref(self.solver())
     }
 }
 
-impl<'a> ops::Not for NodeRef<'a> {
-    type Output = Self;
+impl<'a> ops::Not for &'a NodeRef<'a> {
+    type Output = NodeRef<'a>;
 
-    fn not(self) -> Self {
-        let solver = self.solver();
-        Node::Not(self).into_ref(solver)
+    fn not(self) -> Self::Output {
+        Node::Not(self).into_ref(self.solver())
     }
 }
 
-impl<'a> ops::Shl for NodeRef<'a> {
-    type Output = Self;
+impl<'a> ops::Shl for &'a NodeRef<'a> {
+    type Output = NodeRef<'a>;
 
-    fn shl(self, other: Self) -> Self {
-        let solver = self.solver();
-        Node::Sll(self, other).into_ref(solver)
+    fn shl(self, other: Self) -> Self::Output {
+        Node::Sll(self, other).into_ref(self.solver())
     }
 }
 
-impl<'a> ops::Sub for NodeRef<'a> {
-    type Output = Self;
+impl<'a> ops::Sub for &'a NodeRef<'a> {
+    type Output = NodeRef<'a>;
 
-    fn sub(self, other: Self) -> Self {
-        let solver = self.solver();
-        Node::Sub(self, other).into_ref(solver)
+    fn sub(self, other: Self) -> Self::Output {
+        Node::Sub(self, other).into_ref(self.solver())
     }
 }
