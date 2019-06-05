@@ -27,10 +27,10 @@
 //! let formula = &sum_lt_x & &sum_lt_y;
 //!
 //! // Assert the formula.
-//! solver.assert(formula);
+//! solver.assert(&formula);
 //!
 //! // Solve it: should be satisfiable.
-//! assert_eq!(solver.solve(), boolector::SolveResult::Sat);
+//! assert!(solver.solve().is_sat());
 //! ```
 
 pub use self::bit_vec_assignment::*;
